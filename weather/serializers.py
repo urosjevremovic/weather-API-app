@@ -7,9 +7,5 @@ class CitySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = City
-        fields = '__all__'
+        exclude = ('created', 'updated', )
         lookup_field = 'name'
-        extra_kwargs = {
-            'name': {'read_only': True},
-            'country': {'read_only': True},
-        }

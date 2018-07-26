@@ -5,22 +5,18 @@ from django.templatetags.static import static
 API_KEY = '464a1d9339dc2282caf9b17e02224f3b'
 
 
-def weather_by_city_id(city_id):
+def weather_by_city_name(city_name):
     """Takes weather from Weather API and returns it."""
 
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units=metric'
-    try:
-        data = requests.get(url.format(city_id, API_KEY)).json()
-    except:
-        pass
-
-    print(data)
+    data = requests.get(url.format(city_name, API_KEY)).json()
+    if len(data) < 5:
+        return ''
 
     city_weather = dict()
     city_weather['city_name'] = data['name']
     city_weather['country_name'] = data['sys']['country']
     city_weather['weather'] = data['weather'][0]['main']
-    print(city_weather['weather'])
     city_weather['weather_description'] = data['weather'][0]['description']
     city_weather['temperature'] = int(round(data['main']['temp']))
     city_weather['humidity'] = int(round(data['main']['humidity']))

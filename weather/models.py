@@ -12,6 +12,8 @@ class City(models.Model):
     wind_speed = models.PositiveIntegerField()
     wind_direction = models.CharField(max_length=3)
     icon_url = models.URLField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
