@@ -63,6 +63,4 @@ def get_wind_direction(degree):
         right_border = DEGREES[i + 1]
 
         if left_border < degree <= right_border:
-
-
-    return DIRECTIONS[i]
+            return DIRECTIONS[i]
