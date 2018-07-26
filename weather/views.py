@@ -19,7 +19,7 @@ class CityViewSet(ModelViewSet):
         if exists:
             city = exists.first()
             if (timezone.now() - city.created).seconds > 3600 and (timezone.now() - city.updated).seconds > 3600:
-                city_weather = weather_by_city_name(self.kwargs['name'])
+                city_weather = weather_by_city_name(request, self.kwargs['name'])
                 city.update(name=city_weather['city_name'], country=city_weather['country_name'],
                             weather=city_weather['weather'],
                             weather_description=city_weather['weather_description'],
@@ -29,7 +29,7 @@ class CityViewSet(ModelViewSet):
                             icon_url=city_weather['icon_url'])
                 city.save()
         else:
-            city_weather = weather_by_city_name(self.kwargs['name'])
+            city_weather = weather_by_city_name(request, self.kwargs['name'])
             if city_weather:
                 city = City.objects.create(name=city_weather['city_name'], country=city_weather['country_name'],
                                            weather=city_weather['weather'],
