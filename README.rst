@@ -1,4 +1,4 @@
 weather API app
 -----------------------
 
-​REST​ API for weahter application​.
+​REST​ API for weather application​.

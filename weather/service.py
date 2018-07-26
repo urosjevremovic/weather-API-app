@@ -1,8 +1,10 @@
+import os
+
 import requests
 from django.templatetags.static import static
 
 
-API_KEY = '464a1d9339dc2282caf9b17e02224f3b'
+API_KEY = os.environ.get('WEATHER_API_KEY')
 
 
 def weather_by_city_name(city_name):

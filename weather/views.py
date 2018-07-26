@@ -30,14 +30,14 @@ class CityViewSet(ModelViewSet):
                 city.save()
         else:
             city_weather = weather_by_city_name(self.kwargs['name'])
-            print(city_weather)
             if city_weather:
                 city = City.objects.create(name=city_weather['city_name'], country=city_weather['country_name'],
                                            weather=city_weather['weather'],
                                            weather_description=city_weather['weather_description'],
                                            temperature=city_weather['temperature'], humidity=city_weather['humidity'],
                                            pressure=city_weather['pressure'], wind_speed=city_weather['wind_speed'],
-                                           wind_direction=city_weather['wind_direction'], icon_url=city_weather['icon_url'])
+                                           wind_direction=city_weather['wind_direction'],
+                                           icon_url=city_weather['icon_url'])
                 city.save()
             else:
                 pass
