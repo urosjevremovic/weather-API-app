@@ -1,6 +1,3 @@
-import json
-import os
-
 import requests
 from django.templatetags.static import static
 
@@ -23,6 +20,7 @@ def weather_by_city_id(city_id):
     city_weather['city_name'] = data['name']
     city_weather['country_name'] = data['sys']['country']
     city_weather['weather'] = data['weather'][0]['main']
+    print(city_weather['weather'])
     city_weather['weather_description'] = data['weather'][0]['description']
     city_weather['temperature'] = int(round(data['main']['temp']))
     city_weather['humidity'] = int(round(data['main']['humidity']))
