@@ -4,26 +4,24 @@ import os
 import requests
 from django.templatetags.static import static
 
-from weather.models import Country
 
-
-API_KEY = os.environ.get('WEATHER_API_KEY')
+API_KEY = '464a1d9339dc2282caf9b17e02224f3b'
 
 
 def weather_by_city_id(city_id):
     """Takes weather from Weather API and returns it."""
 
-    url = 'http://api.openweathermap.org/data/2.5/weather?id={}&appid={}&units=metric'
+    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units=metric'
     try:
-        response = requests.get(url.format(city_id, API_KEY)).json()
+        data = requests.get(url.format(city_id, API_KEY)).json()
     except:
         pass
 
-    data = json.loads(response)
+    print(data)
 
     city_weather = dict()
     city_weather['city_name'] = data['name']
-    city_weather['country_name'] = Country.objects.get(code=data['sys']['country']).name
+    city_weather['country_name'] = data['sys']['country']
     city_weather['weather'] = data['weather'][0]['main']
     city_weather['weather_description'] = data['weather'][0]['description']
     city_weather['temperature'] = int(round(data['main']['temp']))
