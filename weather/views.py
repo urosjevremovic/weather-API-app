@@ -14,7 +14,7 @@ class CityViewSet(ModelViewSet):
     http_method_names = ['get', ]
 
     def retrieve(self, request, *args, **kwargs):
-        self.kwargs['name'] = self.kwargs['name'].capitalize()
+        self.kwargs['name'] = self.kwargs['name'].title()
         exists = City.objects.filter(name=self.kwargs['name'])
         if exists:
             city = exists.first()

@@ -51,8 +51,14 @@ class GetSingleCityTest(APITestCase):
         response = self.client.get(f'http://127.0.0.1:8000/cities/{self.belgrade.name}/')
         city = City.objects.get(pk=self.belgrade.pk)
         serializer = CitySerializer(city)
+        self.assertEqual(city.__str__(), 'Belgrade')
         self.assertEqual(response.data, serializer.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    # def test_get_valid_single_city_without_wind_direction_provided_from_external_API(self):
+    #     response = self.client.get(f'http://127.0.0.1:8000/cities/Paris/')
+    #     city = City.objects.get(pk=self.berlin.pk)
+    #     self.assertIn('N/A', str(response.data))
 
     def test_get_invalid_single_city_returns_404(self):
         response = self.client.get('http://127.0.0.1:8000/cities/Velgrade/')
@@ -60,7 +66,6 @@ class GetSingleCityTest(APITestCase):
 
     def test_get_retrieves_single_city_data_from_external_API(self):
         response = self.client.get('http://127.0.0.1:8000/cities/Paris/')
-        print((timezone.now() - self.belgrade.updated).microseconds)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
