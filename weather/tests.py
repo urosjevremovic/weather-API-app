@@ -54,6 +54,10 @@ class GetSingleCityTest(APITestCase):
         self.assertEqual(response.data, serializer.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_get_invalid_single_city_returns_404(self):
+        response = self.client.get('http://127.0.0.1:8000/cities/Velgrade/')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
     def test_get_retrieves_single_city_data_from_external_API(self):
         response = self.client.get('http://127.0.0.1:8000/cities/Paris/')
         print((timezone.now() - self.belgrade.updated).microseconds)
