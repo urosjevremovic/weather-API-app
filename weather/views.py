@@ -29,7 +29,8 @@ class CityViewSet(ModelViewSet):
                                                            pressure=city_weather['pressure'],
                                                            wind_speed=city_weather['wind_speed'],
                                                            wind_direction=city_weather['wind_direction'],
-                                                           icon_url=city_weather['icon_url'])
+                                                           icon_url=city_weather['icon_url'],
+                                                           updated=timezone.now())
                 city.refresh_from_db()
         else:
             city_weather = weather_by_city_name(request, self.kwargs['name'])
